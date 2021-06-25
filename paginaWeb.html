@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" ></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <title>TypeNotes</title>
     <style>
         body {
             background: darkcyan;
         }
 
-        form{
+        form {
             width: 500px;
             padding: 20px;
             margin: auto;
@@ -39,30 +40,67 @@
         }
     </style>
 </head>
+
 <body>
     <nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        <label class= "logo">TypeNotes</label>
+        <label class="logo">TypeNotes</label>
         <ul>
             <li><a class="active" href="#">HOME</a></li>
             <li><a href="#">NOTAS</a></li>
             <li><a href="#">SERVICIOS</a></li>
             <li><a href="#">COMPARTIR</a></li>
-        </ul>    
+        </ul>
     </nav>
     <form>
         First Name: <br>
-        <input type ="text" name="fname"><br>
+        <input type="text" name="fname"><br>
         Last Name: <br>
         <input type="text" name="lname"><br>
         Titulo: <br>
         <input type="text" name="titulo"><br><br>
-        <textarea name="message" rows="5" cols="20"></textarea>
+        <textarea id="textarea" rows="5" cols="20"></textarea>
         <br>
-        <input type="button" value="Publicar">
-    </form>   
+        <button id="boton">Publicar</button>
+
+        <br />
+        Publicaciones:
+        <div id="Publicaciones"></div>
+
+        <script>
+            const boton = document.getElementById('boton');
+            const textarea = document.getElementById('textarea');
+            const Lista = document.getElementById('Lista');
+
+            const valores = JSON.parse(localStorage.getItem('valores')) || [];
+
+            for (let i = 0; i < valores.length; i++) {
+                const textoString = valores[i];
+
+                const nuevoElemento = document.createElement('div');
+                nuevoElemento.innerText = textareaString;
+                Lista.appendChild(nuevoElemento);
+            }
+
+            boton.addEventListener('click', function () {
+                const textareaString = textarea.value;
+
+                const nuevoElemento = document.createElement('div');
+                nuevoElemento.innerText = textareaString;
+                Lista.appendChild(nuevoElemento);
+
+                valores.push(textareaString);
+                localStorage.setItem('valores', JSON.stringify(valores));
+                console.log(localStorage.getItem('valores'));
+
+                textarea.value = '';
+            });
+        </script>
+
+    </form>
 </body>
+
 </html>
